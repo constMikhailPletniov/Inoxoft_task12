@@ -1,0 +1,253 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Documentation",
+        "version": "1.0.0",
+        "description": "This is Inoxoft NodeJs course",
+        "contact": {
+            "email": "myEmail@mail.com"
+        },
+        "tags": {
+            "name": "pests",
+            "description": "All information about Pests"
+        }
+    },
+    "schemes": "http",
+    "paths": {
+        "/auth": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "description": "How users can autorization",
+                "operationId": "login",
+                "produces": "application/json",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "body",
+                        "description": "Valid user email",
+                        "required": true,
+                        "default": "email@email.com",
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "description": "Valid user password",
+                        "required": true,
+                        "default": "QwertY123!!",
+                        "type": "string"
+                    }
+                ],
+                "schema": {
+                    "$ref": "#/definitions/OAuth"
+                }
+            }
+        },
+        "/pest": {
+            "get": {
+                "tags": [
+                    "Pests"
+                ],
+                "description": "Get all pests",
+                "operationsId": "getAllPests",
+                "produces": "application/json",
+                "parameters": [
+                    {
+                        "name": "clasification",
+                        "in": "query",
+                        "description": "Which classification have the pests",
+                        "required": false,
+                        "default": "pesticide",
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Which name have the pests",
+                        "required": false,
+                        "default": "PestName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "numbers",
+                        "in": "query",
+                        "description": "How many pests find on one page",
+                        "required": false,
+                        "default": 1,
+                        "type": "number"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "BAD_REQUEST"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pests"
+                ],
+                "description": "How Create new pest",
+                "operationId": "createPest",
+                "schema": {
+                    "$ref": "#/definitions/Pest"
+                },
+                "parameters": [
+                    {
+                        "name": "clasification",
+                        "in": "body",
+                        "description": "Which classification have the pests",
+                        "required": true,
+                        "default": "pesticide",
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Which name have the pests",
+                        "required": true,
+                        "default": "PestName",
+                        "type": "string"
+                    },
+                    {
+                        "name": "number",
+                        "in": "body",
+                        "description": "How many pests do you add",
+                        "required": true,
+                        "default": 1,
+                        "type": "number"
+                    },
+                    {
+                        "name": "price",
+                        "in": "body",
+                        "description": "Pest Price",
+                        "required": true,
+                        "default": 1,
+                        "type": "number"
+                    },
+                    {
+                        "name": "price",
+                        "in": "body",
+                        "description": "Pest Price",
+                        "required": true,
+                        "default": 1,
+                        "type": "number"
+                    },
+                    {
+                        "name": "purchase",
+                        "in": "body",
+                        "description": "Pest Purchase",
+                        "required": true,
+                        "default": 1,
+                        "type": "number"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Auth token",
+                        "required": true,
+                        "default": "AUTHORIZATION_TOKEN",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "The pest is add to base"
+                    },
+                    "400": {
+                        "description": "BAD_REQUEST"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Pest": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "description": "pest ID",
+                    "type": "string",
+                    "example": "123djjd1213"
+                },
+                "name": {
+                    "description": "unique name of production",
+                    "type": "string",
+                    "example": "PestName"
+                },
+                "price": {
+                    "description": "valid price of current product",
+                    "type": "number",
+                    "example": 123
+                },
+                "purchase": {
+                    "description": "valid purchase of current product",
+                    "type": "number",
+                    "example": 123
+                },
+                "number": {
+                    "description": "How much in shop this product",
+                    "type": "number",
+                    "example": 123
+                },
+                "clasification": {
+                    "description": "Which clasification have this product",
+                    "type": "string",
+                    "example": "pesticide"
+                }
+            }
+        },
+        "OAuth": {
+            "type": "object",
+            "properties": {
+                "accessToken": {
+                    "type": "string",
+                    "description": "The access token",
+                    "example": "1232d23f1231dq"
+                },
+                "refreshToken": {
+                    "type": "string",
+                    "description": "The refresh token",
+                    "example": "1232d23f1231dq"
+                },
+                "[dataEnum.USER]": {
+                    "type": "object",
+                    "description": "The current user object",
+                    "example": "user"
+                }
+            }
+        }
+    },
+    "errorSchema": {
+        "type": "object",
+        "properties": {
+            "message": {
+                "type": "string",
+                "example": "Name is exist"
+            },
+            "data": {
+                "description": "product unique name",
+                "type": "string",
+                "example": "pesticide"
+            },
+            "customCode": {
+                "description": "Custon Error",
+                "type": "string",
+                "example": "400.1"
+            }
+        }
+    }
+}
